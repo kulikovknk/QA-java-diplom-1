@@ -24,6 +24,5 @@ hs_err_pid*
 
 # Default ignored files
 /.idea
-/.allure
 /target
 
