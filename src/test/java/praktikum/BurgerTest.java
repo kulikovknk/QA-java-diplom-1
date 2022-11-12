@@ -7,9 +7,6 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @RunWith(MockitoJUnitRunner.class)
 public class BurgerTest {
 
@@ -29,19 +26,15 @@ public class BurgerTest {
 
         float burgerTestPrice = 0.0F;
 
-        List<Ingredient> ingredients = new ArrayList<>();
-
-        ingredients.add(ingredient);
-        ingredients.add(ingredient);
-
         StringBuilder testReceipt = new StringBuilder();
 
         testReceipt.append(String.format("(==== %s ====)%n", bunTestName));
 
-        for (Ingredient i : ingredients) {
-            testReceipt.append(String.format("= %s %s =%n", ingredientTestType.toString().toLowerCase(),
+        testReceipt.append(String.format("= %s %s =%n", ingredientTestType.toString().toLowerCase(),
                     ingredientTestName));
-        }
+        testReceipt.append(String.format("= %s %s =%n", ingredientTestType.toString().toLowerCase(),
+                ingredientTestName));
+
 
         testReceipt.append(String.format("(==== %s ====)%n", bunTestName));
         testReceipt.append(String.format("%nPrice: %f%n", burgerTestPrice));
@@ -49,7 +42,10 @@ public class BurgerTest {
         String expectedResult = testReceipt.toString();
 
         // создаем тестовый объект
-        Burger burger = new Burger(bun, ingredients);
+        Burger burger = new Burger();
+        burger.setBuns(bun);
+        burger.addIngredient(ingredient);
+        burger.addIngredient(ingredient);
 
         // заполняем стабы для методов внутри тестируемого метода
         Mockito.when(bun.getName()).thenReturn(bunTestName);
@@ -64,10 +60,8 @@ public class BurgerTest {
     @Test
     public void setBunsTest() {
 
-        List<Ingredient> ingredients = new ArrayList<>();
-
         // создаем тестовый объект
-        Burger burger = new Burger(bun, ingredients);
+        Burger burger = new Burger();
 
         burger.setBuns(bun);
 
@@ -78,11 +72,9 @@ public class BurgerTest {
     @Test
     public void addIngredientTest() {
 
-        List<Ingredient> ingredients = new ArrayList<>();
-
         // создаем тестовый объект
-        Burger burger = new Burger(bun, ingredients);
-
+        Burger burger = new Burger();
+        burger.setBuns(bun);
         burger.addIngredient(ingredient);
 
         Assert.assertFalse("Добавление новых элементов в список не выполнено", burger.ingredients.isEmpty());
@@ -91,11 +83,10 @@ public class BurgerTest {
     @Test
     public void removeIngredientTest() {
 
-        List<Ingredient> ingredients = new ArrayList<>();
-        ingredients.add(ingredient);
-
-        // создаем тестовый объект
-        Burger burger = new Burger(bun, ingredients);
+         // создаем тестовый объект
+        Burger burger = new Burger();
+        burger.setBuns(bun);
+        burger.addIngredient(ingredient);
 
         burger.removeIngredient(0);
 
@@ -106,12 +97,11 @@ public class BurgerTest {
     @Test
     public void moveIngredientTest() {
 
-        List<Ingredient> ingredients = new ArrayList<>();
-        ingredients.add(ingredient);
-        ingredients.add(ingredient);
-
         // создаем тестовый объект
-        Burger burger = new Burger(bun, ingredients);
+        Burger burger = new Burger();
+        burger.setBuns(bun);
+        burger.addIngredient(ingredient);
+        burger.addIngredient(ingredient);
 
         burger.moveIngredient(0, 1);
 

@@ -6,9 +6,6 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.mockito.Mockito;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @RunWith(Parameterized.class)
 public class BurgerParamTest {
 
@@ -19,8 +16,9 @@ public class BurgerParamTest {
     public static Object[][] data() {
         return new Object[][] {
                 { 5.5F, 2.4F, 15.8F },
-                { 4.23F, 1.15F, 10.76F },
                 { 0.0F, 0.0F, 0.0F },
+                { 4.23F, 0.0F, 8.46F },
+                { 0.0F, 1.15F, 2.3F },
         };
     }
 
@@ -36,15 +34,14 @@ public class BurgerParamTest {
     @Test
     public void getPriceTest() {
 
-        List<Ingredient> ingredients = new ArrayList<>();
-
-        ingredients.add(ingredient);
-        ingredients.add(ingredient);
-
-        Burger burger = new Burger(bun, ingredients);
+        // создаем тестовый объект
+        Burger burger = new Burger();
+        burger.setBuns(bun);
+        burger.addIngredient(ingredient);
+        burger.addIngredient(ingredient);
 
         Mockito.when(bun.getPrice()).thenReturn(bunTestPrice);
-        Mockito.when(ingredients.get(0).getPrice()).thenReturn(ingredientTestPrice);
+        Mockito.when(ingredient.getPrice()).thenReturn(ingredientTestPrice);
 
         Assert.assertEquals(expectedResult, burger.getPrice(), 0.001);
 

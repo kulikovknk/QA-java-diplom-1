@@ -5,13 +5,13 @@ import org.junit.Test;
 
 public class IngredientTypeTest {
 
-    private final String INGREDIENT_TYPE_SAUSE = "SAUCE";
+    private final String INGREDIENT_TYPE_SAUCE = "SAUCE";
     private final String INGREDIENT_TYPE_FILLING = "FILLING";
 
 
     @Test
     public void checkIngredientTypeSAUCE() {
-        Assert.assertEquals(INGREDIENT_TYPE_SAUSE, IngredientType.SAUCE.name());
+        Assert.assertEquals(INGREDIENT_TYPE_SAUCE, IngredientType.SAUCE.name());
     }
 
     @Test
